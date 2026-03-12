@@ -3,24 +3,32 @@ export const TOPIC_ORDER = [
   { id: "imports-exports", title: "Import and Export" },
   { id: "comments", title: "Comments and Documentation" },
   { id: "linting", title: "Linting and Formatting" },
+  { id: "variables", title: "Variables and Types" },
+  { id: "strings", title: "Strings and Templates" },
+  { id: "booleans-logic", title: "Booleans and Logic" },
+  { id: "loops", title: "Loops and Iteration" },
+  { id: "objects-arrays-dicts", title: "Objects, Arrays, Dictionaries" },
   { id: "functions-reduction", title: "Functions and Reduction" },
   { id: "async", title: "Async Programming" },
+  { id: "error-handling", title: "Error Handling" },
   { id: "oop", title: "Object Oriented Patterns" },
-  { id: "math", title: "Math Methods" },
-  { id: "loops", title: "Loops and Iteration" },
-  { id: "booleans-logic", title: "Booleans and Logic" },
-  { id: "strings", title: "Strings and Templates" },
-  { id: "variables", title: "Variables and Types" },
-  { id: "objects-arrays-dicts", title: "Objects, Arrays, Dictionaries" },
+  { id: "architecture", title: "Architecture Patterns" },
   { id: "algorithms", title: "Algorithms and Complexity" },
-  { id: "commands", title: "Commands and Tooling" },
-  { id: "initialization", title: "Initialization" },
-  { id: "project-structure", title: "Project Structure" },
+  { id: "memory", title: "Memory and Data Lifetime" },
+  { id: "concurrency", title: "Concurrency and Parallelism" },
+  { id: "api-methods", title: "API Methods and Contracts" },
+  { id: "data-modeling", title: "Data Modeling" },
+  { id: "date-methods", title: "Date and Time Methods" },
+  { id: "logging", title: "Logging and Monitoring" },
+  { id: "observability", title: "Observability and Tracing" },
+  { id: "security-hardening", title: "Security Hardening" },
   { id: "testing", title: "Testing" },
   { id: "debugging", title: "Debugging" },
-  { id: "api-methods", title: "API Methods and Contracts" },
-  { id: "logging", title: "Logging and Monitoring" },
-  { id: "date-methods", title: "Date and Time Methods" },
+  { id: "cli-commands", title: "CLI Commands and Automation" },
+  { id: "build-release", title: "Build and Release" },
+  { id: "project-structure", title: "Project Structure" },
+  { id: "initialization", title: "Initialization" },
+  { id: "deployment", title: "Deployment" },
   { id: "common-errors", title: "Common Error Tips" },
   { id: "best-practices", title: "Performance and Security" },
 ] as const;
@@ -59,7 +67,12 @@ export const LANGUAGE_INFO = {
 } as const;
 
 export type LanguageSlug = keyof typeof LANGUAGE_INFO;
+export type TopicSlug = (typeof TOPIC_ORDER)[number]["id"];
 
 export function isLanguageSlug(value: string): value is LanguageSlug {
   return value in LANGUAGE_INFO;
+}
+
+export function isTopicSlug(value: string): value is TopicSlug {
+  return TOPIC_ORDER.some((topic) => topic.id === value);
 }

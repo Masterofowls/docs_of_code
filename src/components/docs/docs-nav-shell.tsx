@@ -27,7 +27,7 @@ function isActive(pathname: string, href: string) {
 }
 
 function topicHref(language: LanguageSlug, topicId: string) {
-  return `/docs/${language}#${topicId}`;
+  return `/docs/${language}/${topicId}`;
 }
 
 export function DocsNavShell({ children }: DocsNavShellProps) {
@@ -80,15 +80,25 @@ export function DocsNavShell({ children }: DocsNavShellProps) {
           Jump To Topic
         </p>
         <div className="mt-3 space-y-1">
-          {TOPIC_ORDER.map((topic) => (
-            <Link
-              className="block rounded-md px-2 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-              href={topicHref(activeLanguage, topic.id)}
-              key={topic.id}
-            >
-              {topic.title}
-            </Link>
-          ))}
+          {TOPIC_ORDER.map((topic) => {
+            const href = topicHref(activeLanguage, topic.id);
+            const topicActive = pathname === href;
+
+            return (
+              <Link
+                className={[
+                  "block rounded-md px-2 py-1.5 text-sm transition-colors",
+                  topicActive
+                    ? "bg-primary/10 text-foreground"
+                    : "text-muted-foreground hover:bg-muted hover:text-foreground",
+                ].join(" ")}
+                href={href}
+                key={topic.id}
+              >
+                {topic.title}
+              </Link>
+            );
+          })}
         </div>
       </div>
     </div>

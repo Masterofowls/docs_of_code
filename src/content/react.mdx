@@ -1,0 +1,144 @@
+# React Field Guide
+
+React focuses on predictable UI state transitions. Build composable components and isolate side effects.
+
+<DocCallout title="Rendering idea">
+Rendering cost often scales with state fan-out, not just component count.
+</DocCallout>
+
+<ComplexityChart language="React" />
+
+<h2 id="syntax">Syntax and Keywords</h2>
+
+- JSX maps state to UI declaratively.
+- Keep component functions pure.
+
+<h2 id="imports-exports">Import and Export</h2>
+
+```tsx
+export function CardTitle({ title }: { title: string }) {
+  return <h2>{title}</h2>;
+}
+
+import { CardTitle } from './card-title';
+```
+
+<h2 id="comments">Comments and Documentation</h2>
+
+- Document component contracts with JSDoc.
+- Explain non-obvious render guards.
+
+<h2 id="linting">Linting and Formatting</h2>
+
+- Enable `react-hooks` lint rules as errors.
+- Keep formatting deterministic with Prettier.
+
+<h2 id="functions-reduction">Functions and Reduction</h2>
+
+- Use reducers (`useReducer`) for related state fields.
+- Memoize only after profiling proves benefit.
+
+<h2 id="async">Async Programming</h2>
+
+- Fetch in effects or framework data layer.
+- Handle loading, success, and error states explicitly.
+
+<h2 id="oop">Object Oriented Patterns</h2>
+
+- React prefers composition and hooks over class inheritance.
+- Encapsulate reusable behavior in custom hooks.
+
+<h2 id="math">Math Methods</h2>
+
+- Use utility modules for derived metrics and chart calculations.
+- Keep floating-point formatting out of core logic when possible.
+
+<h2 id="loops">Loops and Iteration</h2>
+
+- Render lists with `.map` and stable keys.
+- Never use array index as key for mutable collections.
+
+<h2 id="booleans-logic">Booleans and Logic</h2>
+
+- Guard rendering with explicit conditions.
+- Avoid double negatives in JSX branches.
+
+<h2 id="strings">Strings and Templates</h2>
+
+- Build class strings with utility helpers (`clsx`, `cn`).
+- Extract user-facing strings for localization.
+
+<h2 id="variables">Variables and Types</h2>
+
+- Keep local variables immutable inside render flow.
+- Co-locate state near where it is consumed.
+
+<h2 id="objects-arrays-dicts">Objects, Arrays, Dictionaries</h2>
+
+- Update nested state immutably.
+- Normalize server payloads before storing in state.
+
+<h2 id="algorithms">Algorithms and Complexity</h2>
+
+- Expensive transforms should be memoized or moved server-side.
+- Virtualize long lists to control render cost.
+
+<h2 id="commands">Commands and Tooling</h2>
+
+```bash
+npm run dev
+npm run lint
+npm run build
+```
+
+<h2 id="initialization">Initialization</h2>
+
+- Start with route skeleton, shared layout, and core UI primitives.
+- Define state ownership boundaries early.
+
+<h2 id="project-structure">Project Structure</h2>
+
+```text
+src/
+  app/
+  components/
+  hooks/
+  lib/
+```
+
+<h2 id="testing">Testing</h2>
+
+- Use React Testing Library for behavior-focused tests.
+- Add integration tests for route-level data flows.
+
+<h2 id="debugging">Debugging</h2>
+
+- Use React DevTools profiler and component inspector.
+- Check stale closure issues in event handlers and effects.
+
+<h2 id="api-methods">API Methods and Contracts</h2>
+
+- Type and validate payloads before rendering.
+- Use stable API response shapes to reduce UI edge cases.
+
+<h2 id="logging">Logging and Monitoring</h2>
+
+- Track client errors with source maps and release tags.
+- Emit useful breadcrumbs before state-changing actions.
+
+<h2 id="date-methods">Date and Time Methods</h2>
+
+- Use locale-aware formatting with `Intl.DateTimeFormat`.
+- Keep relative time calculations centralized.
+
+<h2 id="common-errors">Common Error Tips</h2>
+
+- Missing key warning: provide stable unique IDs.
+- Effect loop: check dependencies and object identity.
+- Hydration mismatch: avoid non-deterministic render output.
+
+<h2 id="best-practices">Performance and Security</h2>
+
+- Lazy-load heavy components by route/feature.
+- Escape or sanitize user-supplied HTML before rendering.
+- Prefer server components for static-heavy content where possible.

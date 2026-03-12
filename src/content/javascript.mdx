@@ -1,0 +1,149 @@
+# JavaScript Field Guide
+
+JavaScript powers browsers, servers, automation, and edge runtimes. The core skill is managing asynchronous state safely.
+
+<DocCallout title="Async model">
+  Event-loop latency can be approximated as $L \approx \sum_{(i = 1)}^{n} t_i /
+  p$ where $p$ is parallelism.
+</DocCallout>
+
+<ComplexityChart language="JavaScript" />
+
+<h2 id="syntax">Syntax and Keywords</h2>
+
+- Use `const` by default, `let` only when reassignment is required.
+- Use strict equality `===`.
+
+<h2 id="imports-exports">Import and Export</h2>
+
+```js
+export function sum(a, b) {
+  return a + b;
+}
+
+import { sum } from "./math.js";
+```
+
+<h2 id="comments">Comments and Documentation</h2>
+
+- Use JSDoc for exported APIs.
+- Keep comments focused on business constraints.
+
+<h2 id="linting">Linting and Formatting</h2>
+
+- ESLint + Prettier should run in CI and pre-commit.
+- Block merges on `unused-vars` and unreachable code.
+
+<h2 id="functions-reduction">Functions and Reduction</h2>
+
+```js
+const total = [10, 20, 30].reduce((acc, item) => acc + item, 0);
+```
+
+- Prefer small pure utilities and compose them.
+
+<h2 id="async">Async Programming</h2>
+
+- Prefer `async/await` over chained `.then()` for readability.
+- Use `Promise.allSettled` when partial failures are acceptable.
+
+<h2 id="oop">Object Oriented Patterns</h2>
+
+- Use classes for stateful domain objects.
+- Favor composition over deep inheritance.
+
+<h2 id="math">Math Methods</h2>
+
+- `Math.trunc`, `Math.round`, and `Number.isFinite` reduce numeric bugs.
+- Use bigint for large integer IDs when needed.
+
+<h2 id="loops">Loops and Iteration</h2>
+
+- Use `for...of` for arrays and iterables.
+- Avoid `for...in` on arrays because it iterates keys.
+
+<h2 id="booleans-logic">Booleans and Logic</h2>
+
+- Use explicit null checks for API payloads.
+- Avoid coercion-heavy patterns.
+
+<h2 id="strings">Strings and Templates</h2>
+
+- Use template literals for interpolation.
+- Normalize user input with `.trim()` and `.toLowerCase()`.
+
+<h2 id="variables">Variables and Types</h2>
+
+- Scope variables tightly.
+- Narrow unknown values before use.
+
+<h2 id="objects-arrays-dicts">Objects, Arrays, Dictionaries</h2>
+
+- Use object spread for immutable updates.
+- Use `Map` when keys are dynamic or non-string.
+
+<h2 id="algorithms">Algorithms and Complexity</h2>
+
+- Array search is $O(n)$; object/map lookup is expected $O(1)$.
+- Avoid nested loops on large collections unless indexed.
+
+<h2 id="commands">Commands and Tooling</h2>
+
+```bash
+npm install
+npm run lint
+npm test
+node --inspect src/index.js
+```
+
+<h2 id="initialization">Initialization</h2>
+
+- Initialize with `package.json`, lockfile, and lint config.
+- Configure `engines.node` for consistent runtime behavior.
+
+<h2 id="project-structure">Project Structure</h2>
+
+```text
+src/
+  api/
+  domain/
+  shared/
+scripts/
+```
+
+<h2 id="testing">Testing</h2>
+
+- Use Jest or Vitest with focused unit tests.
+- Add integration tests for critical API flows.
+
+<h2 id="debugging">Debugging</h2>
+
+- Use Chrome/Node inspector and source maps.
+- Capture failing inputs before patching logic.
+
+<h2 id="api-methods">API Methods and Contracts</h2>
+
+- Validate input at runtime (`zod`, `ajv`).
+- Version endpoints and document non-2xx responses.
+
+<h2 id="logging">Logging and Monitoring</h2>
+
+- Use structured loggers (`pino`, `winston`).
+- Add request IDs and elapsed time per handler.
+
+<h2 id="date-methods">Date and Time Methods</h2>
+
+- Avoid manual parsing; use ISO 8601.
+- Use `Intl.DateTimeFormat` for user locale rendering.
+
+<h2 id="common-errors">Common Error Tips</h2>
+
+- `Cannot read properties of undefined`: add guards and validation.
+- Promise not awaited: enforce lint rule for floating promises.
+- CORS failures: confirm origin, method, and header policy.
+
+<h2 id="best-practices">Performance and Security</h2>
+
+- Debounce high-frequency UI events.
+- Avoid eval-like APIs and sanitize untrusted content.
+- Profile before premature optimization.

@@ -92,6 +92,16 @@ const LANGUAGE_PROFILES: Record<LanguageSlug, LanguageProfile> = {
     devCommand: "docker compose up postgres",
     codeLanguage: "sql",
   },
+  bash: {
+    runtime: "GNU Bash",
+    packageTool: "system package manager",
+    testTool: "bats",
+    lintTool: "shellcheck",
+    formatter: "shfmt",
+    buildCommand: "bash -n scripts/*.sh",
+    devCommand: "bash scripts/dev.sh",
+    codeLanguage: "bash",
+  },
   react: {
     runtime: "React runtime",
     packageTool: "npm",
@@ -168,23 +178,58 @@ const TOPIC_TEMPLATES: Partial<Record<TopicSlug, TopicTemplate>> = {
 };
 
 const JS_MDN_SOURCE_MAP: Partial<Record<TopicSlug, string>> = {
-  "js-grammar-types": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types",
-  "js-control-flow-error-handling": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Control_flow_and_error_handling",
-  "js-loops-iteration": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration",
-  "js-functions": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions",
-  "js-expressions-operators": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_operators",
-  "js-numbers-strings": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Numbers_and_strings",
-  "js-dates-times": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Representing_dates_times",
-  "js-regular-expressions": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions",
-  "js-indexed-collections": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Indexed_collections",
-  "js-keyed-collections": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Keyed_collections",
-  "js-working-with-objects": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_objects",
-  "js-using-classes": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_classes",
-  "js-using-promises": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises",
-  "js-typed-arrays": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Typed_arrays",
-  "js-iterators-generators": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_generators",
-  "js-resource-management": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Resource_management",
-  "js-internationalization": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Internationalization",
+  "js-grammar-types":
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types",
+  "js-control-flow-error-handling":
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Control_flow_and_error_handling",
+  "js-loops-iteration":
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration",
+  "js-functions":
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions",
+  "js-expressions-operators":
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_operators",
+  "js-numbers-strings":
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Numbers_and_strings",
+  "js-dates-times":
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Representing_dates_times",
+  "js-regular-expressions":
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions",
+  "js-indexed-collections":
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Indexed_collections",
+  "js-keyed-collections":
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Keyed_collections",
+  "js-working-with-objects":
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_objects",
+  "js-using-classes":
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_classes",
+  "js-using-promises":
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises",
+  "js-typed-arrays":
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Typed_arrays",
+  "js-iterators-generators":
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_generators",
+  "js-resource-management":
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Resource_management",
+  "js-internationalization":
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Internationalization",
+  "js-modules":
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules",
+  "js-language-overview":
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Language_overview",
+  "js-data-structures":
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Data_structures",
+  "js-enumerability-ownership":
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Enumerability_and_ownership_of_properties",
+  "js-prototype-chain":
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Inheritance_and_the_prototype_chain",
+  "js-equality-sameness":
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Equality_comparisons_and_sameness",
+  "js-closures":
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures",
+  "js-meta-programming":
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Meta_programming",
+  "js-memory-management":
+    "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Memory_management",
 };
 
 const PY_W3_SOURCE_MAP: Partial<Record<TopicSlug, string>> = {
@@ -217,19 +262,38 @@ const PY_W3_SOURCE_MAP: Partial<Record<TopicSlug, string>> = {
   "py-regex": "https://www.w3schools.com/python/python_regex.asp",
   "py-pip": "https://www.w3schools.com/python/python_pip.asp",
   "py-try-except": "https://www.w3schools.com/python/python_try_except.asp",
-  "py-string-formatting": "https://www.w3schools.com/python/python_string_formatting.asp",
+  "py-string-formatting":
+    "https://www.w3schools.com/python/python_string_formatting.asp",
   "py-none": "https://www.w3schools.com/python/python_none.asp",
   "py-user-input": "https://www.w3schools.com/python/python_user_input.asp",
   "py-virtualenv": "https://www.w3schools.com/python/python_virtualenv.asp",
+  "py-numpy": "https://www.w3schools.com/python/numpy/default.asp",
+  "py-pandas": "https://www.w3schools.com/python/pandas/default.asp",
+  "py-scipy": "https://www.w3schools.com/python/scipy/index.php",
+  "py-django": "https://www.w3schools.com/django/index.php",
+  "py-mysql": "https://www.w3schools.com/python/python_mysql_getstarted.asp",
+  "py-mongodb":
+    "https://www.w3schools.com/python/python_mongodb_getstarted.asp",
 };
 
-function topicAppliesToLanguage(language: LanguageSlug, topic: TopicSlug): boolean {
-  if (topic.startsWith("py-") || topic.startsWith("mpl-") || topic.startsWith("ml-")) {
+function topicAppliesToLanguage(
+  language: LanguageSlug,
+  topic: TopicSlug,
+): boolean {
+  if (
+    topic.startsWith("py-") ||
+    topic.startsWith("mpl-") ||
+    topic.startsWith("ml-")
+  ) {
     return language === "python";
   }
 
   if (topic.startsWith("js-")) {
-    return language === "javascript" || language === "typescript" || language === "react";
+    return (
+      language === "javascript" ||
+      language === "typescript" ||
+      language === "react"
+    );
   }
 
   return true;
@@ -300,7 +364,11 @@ function fallbackTemplate(topic: TopicSlug): TopicTemplate {
     };
   }
 
-  if (topic.startsWith("py-") || topic.startsWith("mpl-") || topic.startsWith("ml-")) {
+  if (
+    topic.startsWith("py-") ||
+    topic.startsWith("mpl-") ||
+    topic.startsWith("ml-")
+  ) {
     return {
       summary: `${title} with W3Schools-style learning progression and practical code snippets.`,
       deepDive:
@@ -348,6 +416,8 @@ function baseExample(language: LanguageSlug): string {
       return `export function processItems(items: number[]): number {\n  return items.reduce((acc, item) => acc + item, 0);\n}`;
     case "sql":
       return `SELECT SUM(amount) AS total\nFROM transactions\nWHERE status = 'completed';`;
+    case "bash":
+      return `#!/usr/bin/env bash\nset -euo pipefail\n\nprintf 'ready\n'`;
     case "react":
       return `export function Summary({ items }: { items: number[] }) {\n  const total = items.reduce((acc, item) => acc + item, 0);\n  return <p>Total: {total}</p>;\n}`;
   }

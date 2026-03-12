@@ -1,142 +1,88 @@
-# SQL Field Guide
+# SQL Documentation Guide
 
-SQL is the foundation for durable data systems. Master querying, indexing, constraints, and observability.
+This guide is adapted from the fetched SQL tutorial snapshot and arranged into database engineering workflows.
 
-<DocCallout title="Cost model">
-A query plan cost can be estimated from cardinality and I/O operations. Index quality often dominates latency.
+<DocCallout title="Fetched source basis">
+  Source snapshot: https://www.w3schools.com/sql/default.asp. The fetched index included SQL syntax and query clauses, joins, aggregation, grouping, constraints, views, indexes, and security topics like SQL injection and prepared statements.
 </DocCallout>
 
 <ComplexityChart language="SQL" />
 
-<h2 id="syntax">Syntax and Keywords</h2>
+<h2 id="learning-path">Learning Path from Fetched Topics</h2>
 
-- Readability first: uppercase keywords, aligned clauses.
-- `SELECT ... FROM ... WHERE ... GROUP BY ... HAVING ... ORDER BY ...`.
+- Query basics: SELECT, WHERE, ORDER BY, LIMIT or TOP.
+- Data changes: INSERT, UPDATE, DELETE.
+- Relational joins: inner, left, right, full, self joins.
+- Aggregation: GROUP BY, HAVING, COUNT, SUM, AVG.
+- Schema and constraints: primary key, foreign key, indexes.
+- Reliability and security: transactions, parameters, least privilege.
 
-<h2 id="imports-exports">Import and Export</h2>
-
-- Bulk import/export via `COPY` (PostgreSQL) or loader tools.
-- Keep schema migration scripts versioned.
-
-<h2 id="comments">Comments and Documentation</h2>
-
-- Use concise comments in migration files.
-- Document every non-obvious index and constraint rationale.
-
-<h2 id="linting">Linting and Formatting</h2>
-
-- Use SQLFluff/pgFormatter for style consistency.
-- Validate migrations in CI against a disposable database.
-
-<h2 id="functions-reduction">Functions and Reduction</h2>
-
-- Aggregations are reduction operations: `SUM`, `AVG`, `COUNT`, `MIN`, `MAX`.
+<h2 id="core-queries">Core Query Patterns</h2>
 
 ```sql
-SELECT customer_id, SUM(total) AS revenue
+SELECT customer_id, COUNT(*) AS orders, SUM(total_amount) AS total_revenue
 FROM orders
-GROUP BY customer_id;
+WHERE status = 'completed'
+GROUP BY customer_id
+HAVING SUM(total_amount) > 500
+ORDER BY total_revenue DESC;
 ```
 
-<h2 id="async">Async Programming</h2>
+<h2 id="joins-and-shaping">Joins and Result Shaping</h2>
 
-- SQL itself is declarative; async behavior is in client drivers.
-- Use connection pools and timeout budgets.
+<MdxCodeTabs
+  data={[
+    {
+      language: 'sql',
+      filename: 'inner_join.sql',
+      code: `SELECT o.id, c.name, o.total_amount
+FROM orders o
+INNER JOIN customers c ON c.id = o.customer_id;`,
+    },
+    {
+      language: 'sql',
+      filename: 'left_join.sql',
+      code: `SELECT c.id, c.name, o.id AS order_id
+FROM customers c
+LEFT JOIN orders o ON o.customer_id = c.id
+ORDER BY c.id;`,
+    },
+  ]}
+/>
 
-<h2 id="oop">Object Oriented Patterns</h2>
+<h2 id="transactions">Transactions and Consistency</h2>
 
-- SQL is relational, not OOP. Map objects at service boundaries only.
-- Avoid leaking ORM assumptions into schema design.
+```sql
+BEGIN;
 
-<h2 id="math">Math Methods</h2>
+UPDATE accounts
+SET balance = balance - 100
+WHERE id = 'A';
 
-- Use numeric precision types (`numeric`, `decimal`) for money.
-- Window functions power running totals and percentiles.
+UPDATE accounts
+SET balance = balance + 100
+WHERE id = 'B';
 
-<h2 id="loops">Loops and Iteration</h2>
+COMMIT;
+```
 
-- Prefer set-based operations over procedural loops.
-- Use recursive CTEs when hierarchical traversal is required.
-
-<h2 id="booleans-logic">Booleans and Logic</h2>
-
-- Understand three-valued logic (`TRUE`, `FALSE`, `NULL`).
-- `WHERE flag IS TRUE` is clearer than implicit checks.
-
-<h2 id="strings">Strings and Templates</h2>
-
-- Use parameterized queries, never string concatenation.
-- Normalize case with collation-aware functions when needed.
-
-<h2 id="variables">Variables and Types</h2>
-
-- Column types are long-term contracts.
-- Keep nullable columns intentional and documented.
-
-<h2 id="objects-arrays-dicts">Objects, Arrays, Dictionaries</h2>
-
-- Structured data can live in JSON columns where justified.
-- Keep frequently filtered values in indexed scalar columns.
-
-<h2 id="algorithms">Algorithms and Complexity</h2>
-
-- Index scans, hash joins, and merge joins have different cost profiles.
-- Use `EXPLAIN ANALYZE` to verify expected plans.
-
-<h2 id="commands">Commands and Tooling</h2>
+<h2 id="tooling">Commands and Tooling</h2>
 
 ```bash
 psql "$DATABASE_URL"
-psql -f migrations/20260312_add_index.sql
+psql -f db/migrations/20260312_add_indexes.sql
 ```
 
-<h2 id="initialization">Initialization</h2>
+<h2 id="testing">Testing and Debugging</h2>
 
-- Start with baseline schema + seed data.
-- Add migrations tool (`prisma`, `flyway`, `liquibase`, or SQL-native).
+- Verify every migration forward and rollback path.
+- Capture exact SQL with bound values when reproducing issues.
+- Use explain analyze on slow production-class queries.
+- Track lock wait and deadlock events.
 
-<h2 id="project-structure">Project Structure</h2>
+<h2 id="security">Security and Performance</h2>
 
-```text
-db/
-  migrations/
-  seeds/
-  views/
-```
-
-<h2 id="testing">Testing</h2>
-
-- Use migration tests and query integration tests.
-- Validate rollback paths for destructive changes.
-
-<h2 id="debugging">Debugging</h2>
-
-- Reproduce with the exact SQL and parameter values.
-- Capture execution plans and lock waits.
-
-<h2 id="api-methods">API Methods and Contracts</h2>
-
-- Document query contracts in repository/service layer.
-- Return stable fields and avoid accidental N+1 query behavior.
-
-<h2 id="logging">Logging and Monitoring</h2>
-
-- Monitor slow queries, lock contention, and connection saturation.
-- Add query tags for service-level traceability.
-
-<h2 id="date-methods">Date and Time Methods</h2>
-
-- Store timestamps in UTC.
-- Use timezone-aware conversion only in presentation layers.
-
-<h2 id="common-errors">Common Error Tips</h2>
-
-- Deadlocks: keep transaction order consistent.
-- Missing index: inspect execution plan on slow filters.
-- Truncation errors: verify column size and input encoding.
-
-<h2 id="best-practices">Performance and Security</h2>
-
-- Principle of least privilege for DB roles.
-- Parameterized statements protect against SQL injection.
-- Add indexes from observed query patterns, not guesses.
+- Use prepared statements for all user-supplied parameters.
+- Grant minimal permissions per service role.
+- Add indexes from observed query patterns, then re-measure.
+- Keep hot filters on typed indexed columns, not free-form text blobs.

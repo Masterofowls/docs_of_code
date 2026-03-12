@@ -14,8 +14,8 @@ export default function DocsHubPage() {
         </h1>
         <p className="max-w-3xl text-base text-muted-foreground md:text-lg">
           Browse practical references for Python, JavaScript, TypeScript, SQL,
-          and React. Every track includes syntax, architecture, async patterns,
-          APIs, testing, debugging, and production tips.
+          Bash, and React. Every track includes syntax, architecture, async
+          patterns, APIs, testing, debugging, and production tips.
         </p>
       </header>
 

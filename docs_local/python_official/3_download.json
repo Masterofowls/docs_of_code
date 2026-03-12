@@ -1,0 +1,13 @@
+{
+  "url": "https://docs.python.org/3/download.html",
+  "title": "Download — Python 3.14.3 documentation",
+  "h1": "Download Python 3.14 documentation",
+  "summary": "Theme    Auto ",
+  "headings": [
+    "Navigation",
+    "Download Python 3.14 documentation",
+    "Problems"
+  ],
+  "content": "Theme\n \n Auto \n Light \n Dark \n \n \n \n \n \n\n \n \n Navigation\n\n \n \n index \n\n \n modules |\n\n \n\n Python »\n\n \n \n \n \n\n \n \n \n\n \n 3.14.3 Documentation »\n \n\n Download \n\n \n \n\n \n \n \n \n \n \n |\n \n\n \n \n Theme\n \n Auto \n Light \n Dark \n \n |\n\n \n \n \n\n \n \n \n \n \n Download Python 3.14 documentation\n\n Last updated on: Mar 12, 2026 (18:37 UTC). \n\n Download an archive containing all the documentation for this version of Python:\n\n \n \n Format \n Packed as .zip \n Packed as .tar.bz2 \n \n \n HTML \n Download \n Download \n \n \n Plain text \n Download \n Download \n \n \n Texinfo \n Download \n Download \n \n \n EPUB \n Download \n \n \n \n\n \nWe no longer provide pre-built PDFs of the documentation.\nTo build a PDF archive, follow the instructions in the\n Developer's Guide \nand run make dist-pdf in the Doc/ directory of a copy of the CPython repository.\n\n \nSee the directory listing \nfor file sizes.\n\n Problems\n\n Open an issue \nif you have comments or suggestions for the Python documentation.\n\n \n \n \n \n \n \n \n \n « \n \n\n \n \n \n \n Navigation\n\n \n \n index \n\n \n modules |\n\n \n\n Python »\n\n \n \n \n \n\n \n \n \n\n \n 3.14.3 Documentation »\n \n\n Download \n\n \n \n\n \n \n \n \n \n \n |\n \n\n \n \n Theme\n \n Auto \n Light \n Dark \n \n |\n\n \n \n \n \n © Copyright 2001 Python Software Foundation.\n \n\n This page is licensed under the Python Software Foundation License Version 2.\n \n\n Examples, recipes, and other code in the documentation are additionally licensed under the Zero Clause BSD License.\n \n\n \n See History and License for more information.\n\n \n \n \n\n The Python Software Foundation is a non-profit corporation.\n Please donate. \n\n \n\n Last updated on Mar 12, 2026 (18:37 UTC).\n \n Found a bug ?\n \n \n\n Created using Sphinx 8.2.3.",
+  "fetchedAt": "2026-03-12T15:54:21.6368957-07:00"
+}

@@ -28,6 +28,18 @@ export const TOPIC_ORDER = [
     id: "js-internationalization",
     title: "JS Internationalization",
   },
+  { id: "js-modules", title: "JS Modules" },
+  { id: "js-language-overview", title: "JS Language Overview" },
+  { id: "js-data-structures", title: "JS Data Structures" },
+  {
+    id: "js-enumerability-ownership",
+    title: "JS Enumerability and Ownership",
+  },
+  { id: "js-prototype-chain", title: "JS Prototype Chain" },
+  { id: "js-equality-sameness", title: "JS Equality and Sameness" },
+  { id: "js-closures", title: "JS Closures" },
+  { id: "js-meta-programming", title: "JS Meta Programming" },
+  { id: "js-memory-management", title: "JS Memory Management" },
   { id: "py-syntax", title: "Python Syntax" },
   { id: "py-output", title: "Python Output" },
   { id: "py-comments", title: "Python Comments" },
@@ -83,6 +95,8 @@ export const TOPIC_ORDER = [
   { id: "py-pandas", title: "Pandas Tutorial" },
   { id: "py-scipy", title: "SciPy Tutorial" },
   { id: "py-django", title: "Django Tutorial" },
+  { id: "py-mysql", title: "Python MySQL Tutorial" },
+  { id: "py-mongodb", title: "Python MongoDB Tutorial" },
   { id: "mpl-intro", title: "Matplotlib Intro" },
   { id: "mpl-get-started", title: "Matplotlib Get Started" },
   { id: "mpl-pyplot", title: "Matplotlib Pyplot" },
@@ -217,6 +231,12 @@ export const LANGUAGE_INFO = {
     accent: "bg-rose-400/20 text-rose-800 border-rose-600/30",
     description:
       "Declarative querying language for modeling, retrieving, and optimizing relational data.",
+  },
+  bash: {
+    title: "Bash",
+    accent: "bg-lime-400/20 text-lime-800 border-lime-600/30",
+    description:
+      "Shell scripting language for automation, tooling, and reliable command-line workflows.",
   },
   react: {
     title: "React",

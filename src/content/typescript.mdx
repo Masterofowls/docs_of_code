@@ -1,151 +1,98 @@
-# TypeScript Field Guide
+# TypeScript Documentation Guide
 
-TypeScript adds static safety over JavaScript and scales reliably across large frontend and backend systems.
+This guide is adapted from the fetched TypeScript tutorial snapshot and reorganized into production-focused documentation.
 
-<DocCallout title="Type-level idea">
-  Generic constraints prevent invalid states before runtime, reducing bug
-  surface area.
+<DocCallout title="Fetched source basis">
+  Source snapshot: https://www.w3schools.com/typescript/index.php. The fetched menu emphasized simple types, arrays, tuples, aliases and interfaces, unions, classes, generics, utility types, narrowing, and advanced mapped or conditional types.
 </DocCallout>
 
 <ComplexityChart language="TypeScript" />
 
-<h2 id="syntax">Syntax and Keywords</h2>
+<h2 id="learning-path">Learning Path from Fetched Topics</h2>
 
-- Prefer `type` for unions and mapped shapes, `interface` for extendable object contracts.
-- Turn on `strict` mode and keep it on.
+- Core type model: primitives, arrays, tuples, enums.
+- Object modeling: aliases, interfaces, unions, intersections.
+- Type safety at runtime boundaries with validators.
+- Scalable patterns: generics, utility types, narrowing.
+- Tooling: strict tsconfig, linting, noEmit type check.
 
-<h2 id="imports-exports">Import and Export</h2>
+<h2 id="types-and-narrowing">Types and Narrowing</h2>
 
 ```ts
-export type User = { id: string; name: string };
-export const parseUser = (raw: unknown): User => {
-  if (!raw || typeof raw !== "object") throw new Error("Invalid user");
-  const value = raw as { id?: unknown; name?: unknown };
-  if (typeof value.id !== "string" || typeof value.name !== "string") {
-    throw new Error("Invalid fields");
-  }
-  return { id: value.id, name: value.name };
+type ApiResult =
+  | { ok: true; data: { id: string; email: string } }
+  | { ok: false; error: string };
+
+function renderResult(result: ApiResult): string {
+  return result.ok ? result.data.email : `error: ${result.error}`;
+}
+```
+
+<h2 id="contracts">Contracts with Validation</h2>
+
+<MdxCodeTabs
+  data={[
+    {
+      language: 'ts',
+      filename: 'schema.ts',
+      code: `import { z } from 'zod';
+
+export const CreateUserSchema = z.object({
+  email: z.string().email(),
+  displayName: z.string().min(2),
+});
+
+export type CreateUser = z.infer<typeof CreateUserSchema>;`,
+    },
+    {
+      language: 'ts',
+      filename: 'handler.ts',
+      code: `import { CreateUserSchema } from './schema';
+
+export function parseCreateUser(raw: unknown) {
+  return CreateUserSchema.parse(raw);
+}`,
+    },
+  ]}
+/>
+
+<h2 id="generics">Generics and Reuse</h2>
+
+```ts
+type Page<T> = {
+  items: T[];
+  nextCursor: string | null;
 };
+
+function firstItem<T>(page: Page<T>): T | null {
+  return page.items[0] ?? null;
+}
 ```
 
-<h2 id="comments">Comments and Documentation</h2>
-
-- Use JSDoc for exported APIs and complex invariants.
-- Document type-level assumptions on utility types.
-
-<h2 id="linting">Linting and Formatting</h2>
-
-- ESLint with `@typescript-eslint` and strict rules.
-- Type-check with `tsc --noEmit` in CI.
-
-<h2 id="functions-reduction">Functions and Reduction</h2>
-
-```ts
-const total = [1, 2, 3].reduce<number>((acc, value) => acc + value, 0);
-```
-
-- Explicit reducer return types avoid widening bugs.
-
-<h2 id="async">Async Programming</h2>
-
-- Model async results with discriminated unions.
-- Do not ignore returned promises.
-
-<h2 id="oop">Object Oriented Patterns</h2>
-
-- Classes are useful for boundaries and domain services.
-- Keep mutable state private and expose narrow methods.
-
-<h2 id="math">Math Methods</h2>
-
-- Use branded types for units (`Milliseconds`, `Cents`) to avoid mixing domains.
-- Guard numeric inputs with runtime checks.
-
-<h2 id="loops">Loops and Iteration</h2>
-
-- `for...of` is often clearer than nested array chains.
-- Keep loop state typed and explicit.
-
-<h2 id="booleans-logic">Booleans and Logic</h2>
-
-- Narrow with `if (value == null)` for nullish checks.
-- Use exhaustive switch with `never` to catch missed cases.
-
-<h2 id="strings">Strings and Templates</h2>
-
-- Template literal types can constrain valid strings.
-- Use utility functions for slug and path generation.
-
-<h2 id="variables">Variables and Types</h2>
-
-- Prefer `const` and avoid mutable shared state.
-- Use `satisfies` for type-safe constant objects.
-
-<h2 id="objects-arrays-dicts">Objects, Arrays, Dictionaries</h2>
-
-- Use `Record<K, V>` for known string key maps.
-- Use readonly arrays where mutation is undesired.
-
-<h2 id="algorithms">Algorithms and Complexity</h2>
-
-- Build typed indices for hot-path lookups.
-- Complexity still follows data shape: types do not change $O(n)$ costs.
-
-<h2 id="commands">Commands and Tooling</h2>
+<h2 id="tooling">Commands and Tooling</h2>
 
 ```bash
+npm install
 npm run lint
-npm run build
 tsc --noEmit
+npm test
 ```
 
-<h2 id="initialization">Initialization</h2>
+<h2 id="testing">Testing and Debugging</h2>
 
-- Initialize `tsconfig.json` with strict flags.
-- Add path aliases and project references as codebase grows.
+- Test runtime behavior and inferred types at boundaries.
+- Keep compiler strict mode enabled in every package.
+- Use source maps and inspect emitted JS for runtime mismatches.
+- Fail CI on unused values and type errors.
 
-<h2 id="project-structure">Project Structure</h2>
+<h2 id="common-errors">Common Error Patterns</h2>
 
-```text
-src/
-  features/
-  shared/
-  types/
-```
-
-<h2 id="testing">Testing</h2>
-
-- Unit-test both runtime behavior and type contracts.
-- Add contract tests for API schemas.
-
-<h2 id="debugging">Debugging</h2>
-
-- Inspect emitted JavaScript when behavior differs from expected types.
-- Use source maps and breakpoints in transpiled environments.
-
-<h2 id="api-methods">API Methods and Contracts</h2>
-
-- Use schema validation (`zod`) and infer types from schemas.
-- Keep request and response types in shared packages when needed.
-
-<h2 id="logging">Logging and Monitoring</h2>
-
-- Type log payloads for consistency.
-- Route logs through one wrapper to enforce metadata.
-
-<h2 id="date-methods">Date and Time Methods</h2>
-
-- Wrap native Date operations in utility modules.
-- Parse and emit ISO strings at service boundaries.
-
-<h2 id="common-errors">Common Error Tips</h2>
-
-- `Type 'undefined' is not assignable`: narrow or default values.
-- Type widening in object literals: use `as const` or `satisfies`.
-- Duplicate runtime and type models: infer from one schema source.
+- Undefined assignment errors: narrow or provide defaults.
+- Widened literal types: use as const or satisfies where needed.
+- Drift between runtime and static models: infer from one schema.
 
 <h2 id="best-practices">Performance and Security</h2>
 
-- Keep type-level programming readable; avoid brittle meta-types.
-- Validate untrusted data at runtime even if types look safe.
-- Split bundles by route and feature.
+- Types improve correctness, not trust boundaries; validate input.
+- Prefer simple and readable types over deeply nested type meta code.
+- Split types by feature boundaries to keep compile speed stable.

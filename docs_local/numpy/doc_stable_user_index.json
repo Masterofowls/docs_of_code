@@ -1,0 +1,11 @@
+{
+  "url": "https://numpy.org/doc/stable/user/index.html",
+  "title": "NumPy user guide — NumPy v2.4 Manual",
+  "h1": "NumPy user guide #",
+  "summary": "NumPy user guide    ",
+  "headings": [
+    "NumPy user guide #"
+  ],
+  "content": "NumPy user guide \n\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n NumPy user guide # \n\n This guide is an overview and explains the important features;\ndetails are found in NumPy reference .\n\n \n Getting started \n\n \n What is NumPy? \n\n Installation \n\n NumPy quickstart \n\n NumPy: the absolute basics for beginners \n\n \n \n \n Fundamentals and usage \n\n \n NumPy fundamentals \n Array creation \n\n Indexing on ndarrays \n\n I/O with NumPy \n\n Data types \n\n Broadcasting \n\n Copies and views \n\n Working with Arrays of Strings And Bytes \n\n Structured arrays \n\n Universal functions ( ufunc ) basics \n\n \n\n \n \n \n \n NumPy for MATLAB users \n\n NumPy tutorials \n\n NumPy how-tos \n\n \n \n \n Advanced usage and interoperability \n\n \n Using NumPy C-API \n\n F2PY user guide and reference manual \n\n Under-the-hood documentation for developers \n\n Interoperability with NumPy \n\n \n \n \n \n \n\n \n \n \n \n \n \n \n \n \n \n \n \n previous\n\n NumPy documentation\n\n \n \n \n \n next\n\n What is NumPy?",
+  "fetchedAt": "2026-03-12T15:54:24.3504627-07:00"
+}

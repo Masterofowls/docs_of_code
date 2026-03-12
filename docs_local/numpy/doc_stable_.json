@@ -1,0 +1,11 @@
+{
+  "url": "https://numpy.org/doc/stable/",
+  "title": "NumPy documentation — NumPy v2.4 Manual",
+  "h1": "NumPy documentation #",
+  "summary": "NumPy documentation #    ",
+  "headings": [
+    "NumPy documentation #"
+  ],
+  "content": "NumPy documentation # \n\n \n \n Version : 2.4\n\n Download documentation :\n Historical versions of documentation \n\n Useful links :\n Home |\n Installation |\n Source Repository |\n Issue Tracker |\n Q&A Support |\n Mailing List \n\n NumPy is the fundamental package for scientific computing in Python. It is a\nPython library that provides a multidimensional array object, various derived\nobjects (such as masked arrays and matrices), and an assortment of routines for\nfast operations on arrays, including mathematical, logical, shape manipulation,\nsorting, selecting, I/O, discrete Fourier transforms, basic linear algebra,\nbasic statistical operations, random simulation and much more.\n\n \n \n \n \n \n Getting started\n\n \n \n New to NumPy? Check out the Absolute Beginner’s Guide. It contains an\nintroduction to NumPy’s main concepts and links to additional tutorials.\n\n \n \n To the absolute beginner’s guide \n\n \n \n \n \n \n \n User guide\n\n \n \n The user guide provides in-depth information on the\nkey concepts of NumPy with useful background information and explanation.\n\n \n \n To the user guide \n\n \n \n \n \n \n \n API reference\n\n \n \n The reference guide contains a detailed description of the functions,\nmodules, and objects included in NumPy. The reference describes how the\nmethods work and which parameters can be used. It assumes that you have an\nunderstanding of the key concepts.\n\n \n \n To the reference guide \n\n \n \n \n \n \n \n Contributor’s guide\n\n \n \n Want to add to the codebase? Can help add translation or a flowchart to the\ndocumentation? The contributing guidelines will guide you through the\nprocess of improving NumPy.\n\n \n \n To the contributor’s guide \n\n \n \n \n \n \n \n\n \n \n \n \n \n \n \n \n \n \n \n next\n\n NumPy user guide",
+  "fetchedAt": "2026-03-12T15:54:24.2993027-07:00"
+}

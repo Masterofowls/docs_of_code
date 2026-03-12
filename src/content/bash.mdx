@@ -1,0 +1,100 @@
+# Bash Documentation Guide
+
+This guide is adapted from the fetched GNU Bash manual snapshot and focused on practical shell scripting.
+
+<DocCallout title="Fetched source basis">
+  Source snapshot: https://www.gnu.org/software/bash/manual/bash.html. The
+  fetched headings covered shell syntax, commands, functions, parameters,
+  expansions, redirections, arrays, job control, history, and programmable
+  completion.
+</DocCallout>
+
+<ComplexityChart language="Bash" />
+
+<h2 id="learning-path">Learning Path from Fetched Topics</h2>
+
+- Shell basics: command invocation, quoting, variables, and exit codes.
+- Data flow: pipes, redirections, and command substitution.
+- Control flow: conditionals, loops, functions, and case matching.
+- Productive shell usage: arrays, history, completion, and job control.
+- Safe automation: strict mode, input checks, and predictable scripts.
+
+<h2 id="syntax">Shell Syntax and Parameters</h2>
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+
+name='docs'
+printf 'Hello, %s\n' "$name"
+```
+
+<h2 id="commands-and-redirection">Commands and Redirection</h2>
+
+<MdxCodeTabs
+  data={[
+    {
+      language: 'bash',
+      filename: 'pipeline.sh',
+      code: `#!/usr/bin/env bash
+set -euo pipefail
+
+ls -1 > files.txt
+grep -i 'mdx' files.txt`,
+    },
+    {
+      language: 'bash',
+      filename: 'log-parser.sh',
+      code: `#!/usr/bin/env bash
+set -euo pipefail
+
+grep -i 'error' app.log | sort | uniq -c`,
+},
+]}
+/>
+
+<h2 id="functions-and-arrays">Functions and Arrays</h2>
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+
+sum() {
+  local total=0
+  for n in "$@"; do
+    total=$((total + n))
+  done
+  printf '%s\n' "$total"
+}
+
+sum 4 8 15 16
+```
+
+<h2 id="tooling">Commands and Tooling</h2>
+
+```bash
+bash --version
+bash -n scripts/deploy.sh
+shellcheck scripts/*.sh
+```
+
+<h2 id="testing">Testing and Debugging</h2>
+
+- Validate syntax first with bash -n.
+- Use shellcheck for static checks and common pitfalls.
+- Run scripts with set -x in debug sessions to trace execution.
+- Check exit codes and fail early on command errors.
+
+<h2 id="common-errors">Common Error Patterns</h2>
+
+- Unquoted variables causing word splitting.
+- Missing set -euo pipefail in automation scripts.
+- Silent failures hidden in multi-stage pipelines.
+- Overwriting files with redirection when append is intended.
+
+<h2 id="best-practices">Performance and Security</h2>
+
+- Prefer explicit quoting and explicit path handling.
+- Validate input before interpolation into commands.
+- Keep scripts idempotent so reruns are safe.
+- Move complex business logic into typed languages when needed.

@@ -1,0 +1,248 @@
+{
+  "generatedAt": "2026-03-12T15:54:37.5458861-07:00",
+  "rootPath": "D:\\docs_of_code\\docs_local",
+  "totalSections": 36,
+  "totalDownloaded": 41.0,
+  "sources": [
+    {
+      "name": "Python Official",
+      "sections": [
+        {
+          "name": "python-official",
+          "outputDir": "python_official",
+          "downloaded": 2
+        }
+      ]
+    },
+    {
+      "name": "Node.js Official",
+      "sections": [
+        {
+          "name": "nodejs-official",
+          "outputDir": "nodejs_official",
+          "downloaded": 1
+        }
+      ]
+    },
+    {
+      "name": "Pandas",
+      "sections": [
+        {
+          "name": "pandas",
+          "outputDir": "pandas",
+          "downloaded": 2
+        }
+      ]
+    },
+    {
+      "name": "PostgreSQL",
+      "sections": [
+        {
+          "name": "postgresql",
+          "outputDir": "postgresql",
+          "downloaded": 1
+        }
+      ]
+    },
+    {
+      "name": "NumPy",
+      "sections": [
+        {
+          "name": "numpy",
+          "outputDir": "numpy",
+          "downloaded": 2
+        }
+      ]
+    },
+    {
+      "name": "Git Official",
+      "sections": [
+        {
+          "name": "git-official",
+          "outputDir": "git_official",
+          "downloaded": 1
+        }
+      ]
+    },
+    {
+      "name": "Django",
+      "sections": [
+        {
+          "name": "django",
+          "outputDir": "django",
+          "downloaded": 1
+        }
+      ]
+    },
+    {
+      "name": "Bash",
+      "sections": [
+        {
+          "name": "bash",
+          "outputDir": "bash",
+          "downloaded": 1
+        }
+      ]
+    },
+    {
+      "name": "W3Schools",
+      "sections": [
+        {
+          "name": "react",
+          "outputDir": "react",
+          "downloaded": 1
+        },
+        {
+          "name": "sql",
+          "outputDir": "sql",
+          "downloaded": 1
+        },
+        {
+          "name": "xml",
+          "outputDir": "xml",
+          "downloaded": 1
+        },
+        {
+          "name": "kotlin",
+          "outputDir": "kotlin",
+          "downloaded": 1
+        },
+        {
+          "name": "cpp",
+          "outputDir": "cpp",
+          "downloaded": 1
+        },
+        {
+          "name": "json",
+          "outputDir": "json",
+          "downloaded": 1
+        },
+        {
+          "name": "mysql",
+          "outputDir": "mysql",
+          "downloaded": 1
+        },
+        {
+          "name": "csharp",
+          "outputDir": "csharp",
+          "downloaded": 1
+        },
+        {
+          "name": "jquery",
+          "outputDir": "jquery",
+          "downloaded": 1
+        },
+        {
+          "name": "bash",
+          "outputDir": "bash_w3",
+          "downloaded": 1
+        },
+        {
+          "name": "java",
+          "outputDir": "java",
+          "downloaded": 1
+        },
+        {
+          "name": "php",
+          "outputDir": "php",
+          "downloaded": 1
+        },
+        {
+          "name": "vue",
+          "outputDir": "vue",
+          "downloaded": 1
+        },
+        {
+          "name": "css",
+          "outputDir": "css",
+          "downloaded": 1
+        },
+        {
+          "name": "angular",
+          "outputDir": "angular",
+          "downloaded": 1
+        },
+        {
+          "name": "sass",
+          "outputDir": "sass",
+          "downloaded": 2
+        },
+        {
+          "name": "nodejs",
+          "outputDir": "nodejs",
+          "downloaded": 1
+        },
+        {
+          "name": "c",
+          "outputDir": "c",
+          "downloaded": 1
+        },
+        {
+          "name": "typescript",
+          "outputDir": "typescript",
+          "downloaded": 1
+        },
+        {
+          "name": "javascript",
+          "outputDir": "javascript",
+          "downloaded": 1
+        },
+        {
+          "name": "rust",
+          "outputDir": "rust",
+          "downloaded": 1
+        },
+        {
+          "name": "django",
+          "outputDir": "django_w3",
+          "downloaded": 1
+        },
+        {
+          "name": "r",
+          "outputDir": "r",
+          "downloaded": 1
+        },
+        {
+          "name": "mongodb",
+          "outputDir": "mongodb",
+          "downloaded": 1
+        },
+        {
+          "name": "python",
+          "outputDir": "python",
+          "downloaded": 2
+        },
+        {
+          "name": "bootstrap",
+          "outputDir": "bootstrap",
+          "downloaded": 1
+        },
+        {
+          "name": "postgresql",
+          "outputDir": "postgresql_w3",
+          "downloaded": 1
+        },
+        {
+          "name": "html",
+          "outputDir": "html",
+          "downloaded": 1
+        },
+        {
+          "name": "go",
+          "outputDir": "go",
+          "downloaded": 1
+        },
+        {
+          "name": "w3css",
+          "outputDir": "w3css",
+          "downloaded": 1
+        },
+        {
+          "name": "git",
+          "outputDir": "git",
+          "downloaded": 1
+        }
+      ]
+    }
+  ]
+}

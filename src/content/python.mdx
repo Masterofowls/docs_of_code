@@ -1,170 +1,94 @@
-# Python Field Guide
+# Python Documentation Guide
 
-Python optimizes readability and expressiveness. Use it for APIs, data pipelines, automation, and ML tooling.
+This guide is adapted from the fetched Python tutorial snapshot and structured for backend, data, and automation workflows.
 
-<DocCallout title="Math mindset">
-  Complexity analysis appears often in this guide. A common model is $T(n) = a
-  \cdot n \log_2(n) + b$.
+<DocCallout title="Fetched source basis">
+  Source snapshot: https://www.w3schools.com/python/default.asp. The fetched content listed fundamentals, control flow, functions, modules, file handling, classes and OOP, NumPy or Pandas, ML tracks, plus MySQL and MongoDB integration.
 </DocCallout>
 
 <ComplexityChart language="Python" />
 
-<h2 id="syntax">Syntax and Keywords</h2>
+<h2 id="learning-path">Learning Path from Fetched Topics</h2>
 
-- Significant indentation defines code blocks.
-- Use `match` for pattern matching in modern Python.
-- Keep expressions explicit for maintainability.
+- Fundamentals: syntax, variables, data types, operators.
+- Core flow: if and else, loops, functions, exceptions.
+- Data structures: list, tuple, set, dictionary.
+- Productive tooling: modules, virtual env, package management.
+- Advanced tracks: OOP, file handling, data and ML libraries.
 
-```python
-match status:
-  case 200:
-    print('ok')
-  case _:
-    print('retry')
-```
-
-<h2 id="imports-exports">Import and Export</h2>
-
-- Use absolute imports inside packages.
-- Export public API through `__init__.py` and `__all__`.
+<h2 id="syntax-and-flow">Syntax and Flow Control</h2>
 
 ```python
-# package/__init__.py
-from .client import ApiClient
-__all__ = ['ApiClient']
+def classify(score: int) -> str:
+  if score >= 90:
+    return 'A'
+  if score >= 75:
+    return 'B'
+  return 'C'
+
+print(classify(88))
 ```
 
-<h2 id="comments">Comments and Documentation</h2>
+<h2 id="functions-and-types">Functions, Types, and Data Structures</h2>
 
-- Use docstrings for every public function/class.
-- Prefer concise comments that explain intent, not syntax.
+<MdxCodeTabs
+  data={[
+    {
+      language: 'python',
+      filename: 'collections.py',
+      code: `from typing import Iterable
 
-<h2 id="linting">Linting and Formatting</h2>
+def normalize_names(values: Iterable[str]) -> list[str]:
+  return [item.strip().lower() for item in values if item.strip()]`,
+    },
+    {
+      language: 'python',
+      filename: 'mapping.py',
+      code: `def to_lookup(users: list[dict[str, str]]) -> dict[str, dict[str, str]]:
+  return {user['id']: user for user in users}`,
+    },
+  ]}
+/>
 
-- Use `ruff` for linting and import hygiene.
-- Use `black` for stable formatting.
-- Enforce in CI with fail-fast behavior.
-
-<h2 id="functions-reduction">Functions and Reduction</h2>
-
-- Keep pure functions side-effect free.
-- Use `functools.reduce` only when it improves clarity.
+<h2 id="io-and-modules">File Handling and Modules</h2>
 
 ```python
-from functools import reduce
-nums = [1, 2, 3, 4]
-total = reduce(lambda acc, x: acc + x, nums, 0)
+from pathlib import Path
+
+def read_config(path: Path) -> str:
+  return path.read_text(encoding='utf-8')
 ```
 
-<h2 id="async">Async Programming</h2>
-
-- Use `asyncio` for high-latency I/O workloads.
-- Avoid blocking calls in async functions.
-
-```python
-import asyncio
-
-async def fetch_all(tasks):
-  return await asyncio.gather(*tasks)
-```
-
-<h2 id="oop">Object Oriented Patterns</h2>
-
-- Use `dataclass` for data carriers.
-- Use protocols/ABC for contracts.
-
-<h2 id="math">Math Methods</h2>
-
-- `math` for scalar math, `statistics` for descriptive metrics.
-- Use `decimal` for money-sensitive precision.
-
-<h2 id="loops">Loops and Iteration</h2>
-
-- Use `for item in iterable` as default.
-- Prefer comprehensions for simple transforms.
-
-<h2 id="booleans-logic">Booleans and Logic</h2>
-
-- Prefer direct truthiness checks: `if users:`.
-- Guard clauses reduce nested branches.
-
-<h2 id="strings">Strings and Templates</h2>
-
-- Prefer f-strings for readability.
-- Use raw strings for regex: `r'\d+'`.
-
-<h2 id="variables">Variables and Types</h2>
-
-- Use `snake_case` names and type hints.
-- Distinguish mutable vs immutable defaults in function signatures.
-
-<h2 id="objects-arrays-dicts">Objects, Arrays, Dictionaries</h2>
-
-- Core structures: lists, tuples, dicts, sets.
-- Use dict comprehensions for normalization pipelines.
-
-<h2 id="algorithms">Algorithms and Complexity</h2>
-
-- Choose list for ordered scans, set/dict for constant-time lookups.
-- Binary search on sorted arrays reaches $O(\log n)$.
-
-<h2 id="commands">Commands and Tooling</h2>
+<h2 id="tooling">Commands and Tooling</h2>
 
 ```bash
 python -m venv .venv
 pip install -r requirements.txt
-pytest -q
 ruff check .
+pytest -q
 ```
 
-<h2 id="initialization">Initialization</h2>
+<h2 id="testing">Testing and Debugging</h2>
 
-- Start with `pyproject.toml`, virtual env, dependency lock.
-- Add pre-commit hooks early.
+- Keep tests small, deterministic, and data-driven.
+- Reproduce with minimal input before patching logic.
+- Use type hints and runtime validation at API boundaries.
+- Use structured logging for request and pipeline tracing.
 
-<h2 id="project-structure">Project Structure</h2>
+<h2 id="data-and-ml">Data and ML Progression</h2>
 
-```text
-src/
-  app/
-  domain/
-  adapters/
-tests/
-```
+- NumPy and Pandas for arrays, tables, and data cleaning.
+- Matplotlib for visualization and analysis output.
+- ML flow: split data, fit model, validate metrics, repeat.
 
-<h2 id="testing">Testing</h2>
+<h2 id="common-errors">Common Error Patterns</h2>
 
-- Use `pytest` with parameterized tests.
-- Keep fixtures small and composable.
-
-<h2 id="debugging">Debugging</h2>
-
-- Use `pdb` or VS Code breakpoints.
-- Reproduce with minimal deterministic input first.
-
-<h2 id="api-methods">API Methods and Contracts</h2>
-
-- Validate request models using `pydantic`.
-- Version routes (`/v1/`) and keep response envelopes stable.
-
-<h2 id="logging">Logging and Monitoring</h2>
-
-- Use structured JSON logs.
-- Include `request_id`, user context, latency.
-
-<h2 id="date-methods">Date and Time Methods</h2>
-
-- Prefer timezone-aware values (`datetime.now(timezone.utc)`).
-- Store UTC; convert only at boundaries.
-
-<h2 id="common-errors">Common Error Tips</h2>
-
-- `ModuleNotFoundError`: verify venv and import path.
-- `TypeError: NoneType`: guard nullable values.
-- Async deadlocks: avoid nested event loops.
+- Module import errors: activate the correct virtual environment.
+- None handling bugs: validate optional values explicitly.
+- Mutable default arguments: use None then initialize internally.
 
 <h2 id="best-practices">Performance and Security</h2>
 
-- Cache expensive deterministic computations.
-- Never trust input; validate and sanitize all external data.
-- Keep dependencies patched and audited.
+- Prefer readable code over clever one-liners in critical paths.
+- Validate all external input and sanitize command boundaries.
+- Audit dependencies and pin versions for reproducible builds.

@@ -75,7 +75,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
         </p>
       </header>
 
-      <TopicDocView doc={doc} />
+      <TopicDocView doc={doc} language={language} />
     </section>
   );
 }

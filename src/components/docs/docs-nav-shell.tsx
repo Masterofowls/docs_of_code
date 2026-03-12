@@ -107,14 +107,16 @@ export function DocsNavShell({ children }: DocsNavShellProps) {
               Docs of Code
             </Link>
             <Sheet>
-              <SheetTrigger asChild>
-                <Button
-                  aria-label="Open documentation menu"
-                  size="icon"
-                  variant="outline"
-                >
-                  <Menu className="h-4 w-4" />
-                </Button>
+              <SheetTrigger
+                render={
+                  <Button
+                    aria-label="Open documentation menu"
+                    size="icon"
+                    variant="outline"
+                  />
+                }
+              >
+                <Menu className="h-4 w-4" />
               </SheetTrigger>
               <SheetContent className="w-[90vw] max-w-[420px] p-0" side="left">
                 <SheetHeader className="border-b border-border/70 px-4 py-3 text-left">

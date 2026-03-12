@@ -2,6 +2,9 @@ import type { MDXComponents } from "mdx/types";
 
 import { ComplexityChart } from "@/components/charts/complexity-chart";
 import { DocCallout } from "@/components/docs/doc-callout";
+import { MdxCodeTabs } from "@/components/docs/mdx-code-tabs";
+import { MdxPre } from "@/components/docs/mdx-pre";
+import { SandboxPlayground } from "@/components/docs/sandbox-playground";
 
 const headingClass =
   "mt-10 scroll-mt-24 text-balance text-2xl font-semibold tracking-tight";
@@ -80,17 +83,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {...props}
       />
     ),
-    pre: ({ className, ...props }) => (
-      <pre
-        className={[
-          "mt-4 overflow-x-auto rounded-xl border border-border/70 bg-card p-4 text-sm shadow-sm",
-          className,
-        ]
-          .filter(Boolean)
-          .join(" ")}
-        {...props}
-      />
-    ),
+    pre: (props) => <MdxPre {...props} />,
     blockquote: ({ className, ...props }) => (
       <blockquote
         className={[
@@ -115,6 +108,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ),
     ComplexityChart,
     DocCallout,
+    MdxCodeTabs,
+    SandboxPlayground,
     ...components,
   };
 }

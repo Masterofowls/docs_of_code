@@ -8,7 +8,6 @@ import {
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const highlights = [
@@ -61,18 +60,14 @@ export default function Home() {
           </p>
           <div className="flex flex-wrap gap-3">
             <Link
-              className={buttonVariants({ className: "h-9 px-3", size: "lg" })}
+              className="inline-flex h-9 items-center justify-center gap-1.5 rounded-lg bg-primary px-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
               href="/docs"
             >
               Open Documentation
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
-              className={buttonVariants({
-                className: "h-9 px-3",
-                size: "lg",
-                variant: "outline",
-              })}
+              className="inline-flex h-9 items-center justify-center rounded-lg border border-border bg-background px-3 text-sm font-medium text-foreground transition-colors hover:bg-muted"
               href="/docs/python"
             >
               Start with Python

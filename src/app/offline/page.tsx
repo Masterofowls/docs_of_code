@@ -1,7 +1,5 @@
 import Link from "next/link";
 
-import { Button } from "@/components/ui/button";
-
 export default function OfflinePage() {
   return (
     <main className="mx-auto flex min-h-dvh w-full max-w-2xl flex-col items-center justify-center px-6 text-center">
@@ -12,9 +10,12 @@ export default function OfflinePage() {
         The cached documentation is still available. Reconnect to sync the
         latest updates and examples.
       </p>
-      <Button asChild className="mt-6">
-        <Link href="/docs">Back to docs</Link>
-      </Button>
+      <Link
+        className="mt-6 inline-flex h-9 items-center justify-center rounded-lg bg-primary px-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+        href="/docs"
+      >
+        Back to docs
+      </Link>
     </main>
   );
 }
